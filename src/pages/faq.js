@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
 
 const faqs = [
   {
@@ -22,7 +23,7 @@ const Accordion = ({ question, answer, isOpen, toggleAccordion }) => {
   return (
     <div className="rounded-lg mb-4">
       <button
-        className="w-full p-4 sm:p-5 md:p-6 text-left bg-black hover:bg-gray-900 border-t border-cyan-400"
+        className="w-full p-4 sm:p-5 md:p-6 text-left hover:bg-gray-900 border-t border-teal-600"
         onClick={toggleAccordion}
       >
         <div className="flex justify-between items-center">
@@ -69,7 +70,7 @@ const SearchBar = ({ searchTerm, handleSearch }) => (
       placeholder="Search for a Question"
       value={searchTerm}
       onChange={handleSearch}
-      className="w-full p-2 sm:p-3 md:p-4 rounded-xl border border-cyan-400 bg-black hover:bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:border-white"
+      className="w-full p-2 sm:p-3 md:p-4 rounded-xl border border-teal-600 bg-black hover:bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:border-white"
     />
   </div>
 );
@@ -81,7 +82,7 @@ const ExpandCollapseAllButton = ({
   <div className="flex justify-center md:justify-end mb-6">
     <button
       onClick={handleExpandCollapseAll}
-      className="w-full md:w-32 text-sm sm:text-base md:text-lg px-4 py-2 mt-2 bg-white hover:bg-cyan-400 text-black hover:text-white font-semibold rounded-lg transition-all duration-300"
+      className="w-full md:w-32 text-sm sm:text-base md:text-lg px-4 py-2 bg-white hover:bg-teal-600 text-black hover:text-white font-semibold rounded-lg transition-all duration-300"
     >
       {areAllExpanded ? "Collapse All" : "Expand All"}
     </button>
@@ -92,6 +93,17 @@ const FAQ = () => {
   const [filteredFaqs, setFilteredFaqs] = useState(faqs);
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedFaqs, setExpandedFaqs] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const querySearchTerm = router.query.search || "";
+    setSearchTerm(querySearchTerm);
+
+    const filtered = faqs.filter((faq) =>
+      faq.question.toLowerCase().includes(querySearchTerm.toLowerCase())
+    );
+    setFilteredFaqs(filtered);
+  }, [router.query.search]);
 
   const handleSearch = (e) => {
     const searchValue = e.target.value.toLowerCase();
@@ -101,7 +113,9 @@ const FAQ = () => {
       faq.question.toLowerCase().includes(searchValue)
     );
     setFilteredFaqs(filtered);
-    setExpandedFaqs([]); // Collapse all on new search
+    setExpandedFaqs([]);
+
+    router.push(`?search=${searchValue}`, undefined, { shallow: true });
   };
 
   const toggleAccordion = (index) => {
@@ -119,11 +133,9 @@ const FAQ = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 bg-black">
+    <div className="p-4 sm:p-6 md:p-8 ">
       <h1 className="mb-6 sm:mb-8 font-bold text-2xl sm:text-3xl md:text-4xl text-center">
-        <span className="text-cyan-400">F</span>requently{" "}
-        <span className="text-cyan-400">A</span>sked{" "}
-        <span className="text-cyan-400">Q</span>uestions
+        Frequently Asked Questions
       </h1>
 
       <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
