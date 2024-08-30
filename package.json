@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out"
+    "deploy": "gh-pages -d out --nojekyll --cname https://richardzhang01.github.io/faq-page/",
+    "static": "next build && touch ./out/.nojekyll && echo 'https://richardzhang01.github.io/faq-page/' > ./out/CNAME"
   },
   "dependencies": {
     "next": "14.2.5",
