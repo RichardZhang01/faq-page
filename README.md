@@ -66,5 +66,5 @@ The FAQ page is located at /faq and is built with Next.js with Tailwind CSS for 
 
 ## Author
 
-- Linkedin - [@yRichardZhang](https://www.linkedin.com/in/richard-zhiyuan-zhang/)
+- Linkedin - [@RichardZhang](https://www.linkedin.com/in/richard-zhiyuan-zhang/)
 
