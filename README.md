@@ -2,8 +2,6 @@
 
 This is a quick mockup of an faq page, with requirements set by a challenge on [HireUp](https://www.usehireup.com/):
 
-Requirements
-
 **Static Route:**
 
 - Create a page at /faq that displays a list of FAQ items.
