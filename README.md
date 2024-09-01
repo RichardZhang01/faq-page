@@ -53,7 +53,7 @@ The FAQ page is located at /faq and is built with Next.js with Tailwind CSS for 
 
 ### Screenshot
 
-![qr-code-component-screenshot](./screenshot.png)
+![faq-page-screenshot](./screenshot.png)
 
 ### Links
 
