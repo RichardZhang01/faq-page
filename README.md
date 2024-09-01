@@ -1,4 +1,4 @@
-# Frontend Mentor - QR code component solution
+# HireUp - FAQ Page Challenge
 
 This is a quick mockup of an faq page, with requirements set by a challenge on [HireUp](https://www.usehireup.com/):
 
